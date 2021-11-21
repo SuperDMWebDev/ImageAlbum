@@ -7,19 +7,19 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.myapplication.R;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 
+/* t* tương tác giữa picture facer and actvity fracment*/
+public class IndicatorAdapterAndFragment extends RecyclerView.Adapter<indicatorHolder> {
 
-public class recyclerViewPagerImageIndicator extends RecyclerView.Adapter<indicatorHolder> {
-
-    ArrayList<pictureFacer> pictureList;
+    ArrayList<PictureInformation> pictureList;
     Context pictureContx;
     private final com.example.myapplication.imageIndicatorListener imageListerner;
 
-    public recyclerViewPagerImageIndicator(ArrayList<pictureFacer> pictureList, Context pictureContx, com.example.myapplication.imageIndicatorListener imageListerner) {
+    public IndicatorAdapterAndFragment(ArrayList<PictureInformation> pictureList, Context pictureContx, com.example.myapplication.imageIndicatorListener imageListerner) {
         this.pictureList = pictureList;
         this.pictureContx = pictureContx;
         this.imageListerner = imageListerner;
@@ -37,7 +37,7 @@ public class recyclerViewPagerImageIndicator extends RecyclerView.Adapter<indica
     @Override
     public void onBindViewHolder(@NonNull indicatorHolder holder, final int position) {
 
-        final pictureFacer pic = pictureList.get(position);
+        final PictureInformation pic = pictureList.get(position);
 
         holder.positionController.setBackgroundColor(pic.getSelected() ? Color.parseColor("#00000000") : Color.parseColor("#8c000000"));
 

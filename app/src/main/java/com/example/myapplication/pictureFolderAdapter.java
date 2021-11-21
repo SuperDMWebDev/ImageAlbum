@@ -2,14 +2,13 @@ package com.example.myapplication;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.myapplication.R;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
@@ -17,14 +16,14 @@ import java.util.ArrayList;
 
 public class pictureFolderAdapter extends RecyclerView.Adapter<pictureFolderAdapter.FolderHolder>{
 
-    private ArrayList<imageFolder> folders;
-    private Context folderContx;
-    private itemClickListener listenToClick;
+    private ArrayList<imageFolder> imageFolder;
+    private Context folderContex;
+    private itemClickListener itemClick;
 
-    public pictureFolderAdapter(ArrayList<imageFolder> folders, Context folderContx, itemClickListener listen) {
-        this.folders = folders;
-        this.folderContx = folderContx;
-        this.listenToClick = listen;
+    public pictureFolderAdapter(ArrayList<imageFolder> imageFolder, Context folderContex, itemClickListener listen) {
+        this.imageFolder = imageFolder;
+        this.folderContex = folderContex;
+        this.itemClick = listen;
     }
 
     @NonNull
@@ -38,9 +37,9 @@ public class pictureFolderAdapter extends RecyclerView.Adapter<pictureFolderAdap
 
     @Override
     public void onBindViewHolder(@NonNull FolderHolder holder, int position) {
-        final imageFolder folder = folders.get(position);
+        final imageFolder folder = imageFolder.get(position);
 
-        Glide.with(folderContx)
+        Glide.with(folderContex)
                 .load(folder.getFirstPic())
                 .apply(new RequestOptions().centerCrop())
                 .into(holder.folderPic);
@@ -54,7 +53,7 @@ public class pictureFolderAdapter extends RecyclerView.Adapter<pictureFolderAdap
         holder.folderPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listenToClick.onPicClicked(folder.getPath(),folder.getFolderName());
+                itemClick.onPicClicked(folder.getPath(),folder.getFolderName());
             }
         });
 
@@ -62,14 +61,13 @@ public class pictureFolderAdapter extends RecyclerView.Adapter<pictureFolderAdap
 
     @Override
     public int getItemCount() {
-        return folders.size();
+        return imageFolder.size();
     }
 
 
     public class FolderHolder extends RecyclerView.ViewHolder{
         ImageView folderPic;
         TextView folderName;
-        //set textview for foldersize
         TextView folderSize;
         public FolderHolder(@NonNull View itemView) {
             super(itemView);

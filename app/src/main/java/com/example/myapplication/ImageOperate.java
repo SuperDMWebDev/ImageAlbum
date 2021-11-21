@@ -16,12 +16,12 @@ import java.util.ArrayList;
 
 
 
-public class ImageDisplay extends AppCompatActivity implements itemClickListener {
+public class ImageOperate extends AppCompatActivity implements itemClickListener {
 
     RecyclerView imageRecycler;
-    ArrayList<PictureInformation> allpictures;
-    ProgressBar load;
-    String foldePath;
+    ArrayList<PictureInformation> pictureInformation;
+    ProgressBar NoPictureShow;
+    String folderPath;
     TextView folderName;
 
     @Override
@@ -32,35 +32,32 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
         folderName = findViewById(R.id.foldername);
         folderName.setText(getIntent().getStringExtra("folderName"));
 
-        foldePath =  getIntent().getStringExtra("folderPath");
-        allpictures = new ArrayList<>();
+        folderPath =  getIntent().getStringExtra("folderPath");
+        pictureInformation = new ArrayList<>();
         imageRecycler = findViewById(R.id.recycler);
         // addItem decoration
         imageRecycler.hasFixedSize();
-        load = findViewById(R.id.loader);
+        NoPictureShow = findViewById(R.id.loader);
 
 
-        if(allpictures.isEmpty()){
-            load.setVisibility(View.VISIBLE);
-            allpictures = getAllImagesByFolder(foldePath);
-            imageRecycler.setAdapter(new picture_Adapter(allpictures,ImageDisplay.this,this));
-            load.setVisibility(View.GONE);
+        if(pictureInformation.isEmpty()){
+            NoPictureShow.setVisibility(View.VISIBLE);
+            pictureInformation = getAllImagesByFolder(folderPath);
+            imageRecycler.setAdapter(new picture_Adapter(pictureInformation, ImageOperate.this,this));
+            NoPictureShow.setVisibility(View.GONE);
         }else{
 
         }
     }
 
     @Override
-    public void onPicClicked(PicHolder holder, int position, ArrayList<PictureInformation> pics) {
-        pictureBrowserFragment browser = pictureBrowserFragment.newInstance(pics,position,ImageDisplay.this);
+    public void onPicClicked(PictureHolder holder, int position, ArrayList<PictureInformation> pics) {
+        ImageSlider browser = ImageSlider.newInstance(pics,position, ImageOperate.this);
 
-        // Note that we need the API version check here because the actual transition classes (e.g. Fade)
-        // are not in the support library and are only available in API 21+. The methods we are calling on the Fragment
-        // ARE available in the support library (though they don't do anything on API < 21)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //browser.setEnterTransition(new Slide());
-            //browser.setExitTransition(new Slide()); uncomment this to use slide transition and comment the two lines below
+//            browser.setEnterTransition(new Slide());
+//            browser.setExitTransition(new Slide()); //uncomment this to use slide transition and comment the two lines below
             browser.setEnterTransition(new Fade());
             browser.setExitTransition(new Fade());
         }
@@ -85,7 +82,7 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
         Uri allVideosuri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String[] projection = { MediaStore.Images.ImageColumns.DATA ,MediaStore.Images.Media.DISPLAY_NAME,
                 MediaStore.Images.Media.SIZE};
-        Cursor cursor = ImageDisplay.this.getContentResolver().query( allVideosuri, projection, MediaStore.Images.Media.DATA + " like ? ", new String[] {"%"+path+"%"}, null);
+        Cursor cursor = ImageOperate.this.getContentResolver().query( allVideosuri, projection, MediaStore.Images.Media.DATA + " like ? ", new String[] {"%"+path+"%"}, null);
         try {
             cursor.moveToFirst();
             do{

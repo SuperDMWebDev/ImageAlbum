@@ -27,7 +27,7 @@ import static androidx.core.view.ViewCompat.setTransitionName;
 /**
  // xu li viec luot tat ca cac anh Picture Facer va duoc tai vao trong viewpager
  */
-public class pictureBrowserFragment extends Fragment implements imageIndicatorListener {
+public class ImageSlider extends Fragment implements imageIndicatorListener {
 
     private  ArrayList<PictureInformation> allImages = new ArrayList<>();
     private int position;
@@ -40,18 +40,18 @@ public class pictureBrowserFragment extends Fragment implements imageIndicatorLi
     private ImagesPagerAdapter pagingImages;
     private int previousSelected = -1;
 
-    public pictureBrowserFragment(){
+    public ImageSlider(){
 
     }
 
-    public pictureBrowserFragment(ArrayList<PictureInformation> allImages, int imagePosition, Context anim) {
+    public ImageSlider(ArrayList<PictureInformation> allImages, int imagePosition, Context anim) {
         this.allImages = allImages;
         this.position = imagePosition;
         this.animeContx = anim;
     }
 
-    public static pictureBrowserFragment newInstance(ArrayList<PictureInformation> allImages, int imagePosition, Context anim) {
-        pictureBrowserFragment fragment = new pictureBrowserFragment(allImages,imagePosition,anim);
+    public static ImageSlider newInstance(ArrayList<PictureInformation> allImages, int imagePosition, Context anim) {
+        ImageSlider fragment = new ImageSlider(allImages,imagePosition,anim);
         return fragment;
     }
 

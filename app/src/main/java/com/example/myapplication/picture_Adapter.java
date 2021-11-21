@@ -11,20 +11,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
-public class picture_Adapter extends RecyclerView.Adapter<PicHolder> {
+public class picture_Adapter extends RecyclerView.Adapter<PictureHolder> {
 
-    private ArrayList<pictureFacer> pictureList;
+    private ArrayList<PictureInformation> pictureList;
     private Context pictureContx;
     private final itemClickListener picListerner;
 
 
-    public picture_Adapter(ArrayList<pictureFacer> pictureList, Context pictureContx, itemClickListener picListerner) {
+    public picture_Adapter(ArrayList<PictureInformation> pictureList, Context pictureContx, itemClickListener picListerner) {
         this.pictureList = pictureList;
         this.pictureContx = pictureContx;
         this.picListerner = picListerner;
@@ -32,16 +31,16 @@ public class picture_Adapter extends RecyclerView.Adapter<PicHolder> {
 
     @NonNull
     @Override
-    public PicHolder onCreateViewHolder(@NonNull ViewGroup container, int position) {
+    public PictureHolder onCreateViewHolder(@NonNull ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         View cell = inflater.inflate(R.layout.picture_holder_item, container, false);
-        return new PicHolder(cell);
+        return new PictureHolder(cell);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final PicHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final PictureHolder holder, @SuppressLint("RecyclerView") final int position) {
 
-        final pictureFacer image = pictureList.get(position);
+        final PictureInformation image = pictureList.get(position);
 
         Glide.with(pictureContx)
                 .load(image.getPicturePath())

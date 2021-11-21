@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ImageDisplay"
+    tools:context=".ImageOperate"
     android:id="@+id/displayContainer">
     <!-- layout chinh thu 2-->
     <RelativeLayout
@@ -31,7 +31,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <com.example.myapplication.AutoFitRecyclerView
+        <com.example.myapplication.RecyclerView1
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -47,7 +47,7 @@
             app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
             app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"-->
 
-        </com.example.myapplication.AutoFitRecyclerView>
+        </com.example.myapplication.RecyclerView1>
 
     </RelativeLayout>
 

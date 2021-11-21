@@ -2,7 +2,7 @@ package com.example.myapplication;
 
 
 
-public class pictureFacer {
+public class PictureInformation {
 
     private String pictureName;
     private String picturePath;
@@ -10,11 +10,11 @@ public class pictureFacer {
     private  String imageUri;
     private Boolean selected = false;
 
-    public pictureFacer(){
+    public PictureInformation(){
 
     }
 
-    public pictureFacer(String picturName, String picturePath, String pictureSize, String imageUri) {
+    public PictureInformation(String picturName, String picturePath, String pictureSize, String imageUri) {
         this.pictureName = picturName;
         this.picturePath = picturePath;
         this.pictureSize = pictureSize;

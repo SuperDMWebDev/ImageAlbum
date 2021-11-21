@@ -119,14 +119,14 @@ public class MainActivity extends AppCompatActivity implements itemClickListener
 
 
     @Override
-    public void onPicClicked(PicHolder holder, int position, ArrayList<pictureFacer> pics) {
+    public void onPicClicked(PictureHolder holder, int position, ArrayList<PictureInformation> pics) {
 
     }
 
     //Mỗi khi một mục trong RecyclerView được nhấp, phương pháp này từ việc triển khai Listener
     @Override
     public void onPicClicked(String pictureFolderPath,String folderName) {
-        Intent move = new Intent(MainActivity.this,ImageDisplay.class);
+        Intent move = new Intent(MainActivity.this, ImageOperate.class);
         move.putExtra("folderPath",pictureFolderPath);
         move.putExtra("folderName",folderName);
 
