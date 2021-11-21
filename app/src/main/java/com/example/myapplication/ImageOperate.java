@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ImageDisplay extends AppCompatActivity implements itemClickListener {
 
     RecyclerView imageRecycler;
-    ArrayList<pictureFacer> allpictures;
+    ArrayList<PictureInformation> allpictures;
     ProgressBar load;
     String foldePath;
     TextView folderName;
@@ -51,7 +51,7 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
     }
 
     @Override
-    public void onPicClicked(PicHolder holder, int position, ArrayList<pictureFacer> pics) {
+    public void onPicClicked(PicHolder holder, int position, ArrayList<PictureInformation> pics) {
         pictureBrowserFragment browser = pictureBrowserFragment.newInstance(pics,position,ImageDisplay.this);
 
         // Note that we need the API version check here because the actual transition classes (e.g. Fade)
@@ -80,8 +80,8 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
     }
 
 
-    public ArrayList<pictureFacer> getAllImagesByFolder(String path){
-        ArrayList<pictureFacer> images = new ArrayList<>();
+    public ArrayList<PictureInformation> getAllImagesByFolder(String path){
+        ArrayList<PictureInformation> images = new ArrayList<>();
         Uri allVideosuri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String[] projection = { MediaStore.Images.ImageColumns.DATA ,MediaStore.Images.Media.DISPLAY_NAME,
                 MediaStore.Images.Media.SIZE};
@@ -89,7 +89,7 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
         try {
             cursor.moveToFirst();
             do{
-                pictureFacer pic = new pictureFacer();
+                PictureInformation pic = new PictureInformation();
 
                 pic.setPicturName(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME)));
 
@@ -100,7 +100,7 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
                 images.add(pic);
             }while(cursor.moveToNext());
             cursor.close();
-            ArrayList<pictureFacer> reSelection = new ArrayList<>();
+            ArrayList<PictureInformation> reSelection = new ArrayList<>();
             for(int i = images.size()-1;i > -1;i--){
                 reSelection.add(images.get(i));
             }

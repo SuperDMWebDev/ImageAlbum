@@ -7,7 +7,7 @@
     android:layout_marginEnd="1dp"
     android:layout_marginRight=".5dp"
     android:layout_marginStart="1dp">
-<!-- layout chinh thu 1-->
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/folderCard"
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="8"
-                />
+                app:srcCompat="@drawable/cat" />
 
             <TextView
                 android:id="@+id/folderName"

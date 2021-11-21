@@ -16,10 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import com.example.myapplication.R;
-import com.example.myapplication.imageIndicatorListener;
-import com.example.myapplication.pictureFacer;
-import com.example.myapplication.recyclerViewPagerImageIndicator;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
@@ -32,7 +29,7 @@ import static androidx.core.view.ViewCompat.setTransitionName;
  */
 public class pictureBrowserFragment extends Fragment implements imageIndicatorListener {
 
-    private  ArrayList<pictureFacer> allImages = new ArrayList<>();
+    private  ArrayList<PictureInformation> allImages = new ArrayList<>();
     private int position;
     private Context animeContx;
     private ImageView image;
@@ -47,13 +44,13 @@ public class pictureBrowserFragment extends Fragment implements imageIndicatorLi
 
     }
 
-    public pictureBrowserFragment(ArrayList<pictureFacer> allImages, int imagePosition, Context anim) {
+    public pictureBrowserFragment(ArrayList<PictureInformation> allImages, int imagePosition, Context anim) {
         this.allImages = allImages;
         this.position = imagePosition;
         this.animeContx = anim;
     }
 
-    public static pictureBrowserFragment newInstance(ArrayList<pictureFacer> allImages, int imagePosition, Context anim) {
+    public static pictureBrowserFragment newInstance(ArrayList<PictureInformation> allImages, int imagePosition, Context anim) {
         pictureBrowserFragment fragment = new pictureBrowserFragment(allImages,imagePosition,anim);
         return fragment;
     }
@@ -86,7 +83,7 @@ public class pictureBrowserFragment extends Fragment implements imageIndicatorLi
         indicatorRecycler = view.findViewById(R.id.indicatorRecycler);
         indicatorRecycler.hasFixedSize();
         indicatorRecycler.setLayoutManager(new GridLayoutManager(getContext(),1,RecyclerView.HORIZONTAL,false));
-        RecyclerView.Adapter indicatorAdapter = new recyclerViewPagerImageIndicator(allImages,getContext(),this);
+        RecyclerView.Adapter indicatorAdapter = new IndicatorAdapterAndFragment(allImages,getContext(),this);
         indicatorRecycler.setAdapter(indicatorAdapter);
 
         //adjusting the recyclerView indicator to the current position of the viewPager, also highlights the image in recyclerView with respect to the
@@ -172,7 +169,7 @@ public class pictureBrowserFragment extends Fragment implements imageIndicatorLi
 
             setTransitionName(image, String.valueOf(position)+"picture");
 
-            pictureFacer pic = allImages.get(position);
+            PictureInformation pic = allImages.get(position);
             Glide.with(animeContx)
                     .load(pic.getPicturePath())
                     .apply(new RequestOptions().fitCenter())
